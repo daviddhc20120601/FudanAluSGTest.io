@@ -20,14 +20,22 @@ $(function() {
       $this = $("#sendMessageButton");
       $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
       $.ajax({
-        url: "././mail/contact_me.php",
+        headers:{
+        'Content-Type': 'application/json'
+    	},
+	url: "https://oapi.dingtalk.com/robot/send?access_token=9d5038fc5aca2ecd5c39dbd1761a81c6e1bf183f79840d6e854976389e63b193",
         type: "POST",
         data: {
-          name: name,
-          phone: phone,
-          email: email,
-          message: message
-        },
+          "msgtype": "text", 
+          "text": {
+		"content":"test",
+		"name":name,
+		"email":email,
+		"phone":phone,
+		"message":message
+		}
+	  }
+	},
         cache: false,
         success: function() {
           // Success message
